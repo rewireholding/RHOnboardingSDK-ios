@@ -1,0 +1,94 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.128.108 clang-1500.0.40.1)
+// swift-module-flags: -target x86_64-apple-ios15.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name RHOnboardingSDK
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import AVFoundation
+import DeveloperToolsSupport
+import Foundation
+@_exported import RHOnboardingSDK
+import Security
+import Swift
+import SwiftUI
+import UIKit
+import UniformTypeIdentifiers
+import _Concurrency
+import _StringProcessing
+import _SwiftConcurrencyShims
+@_hasMissingDesignatedInitializers @objc(RHOnboardingError) public class RHOnboardingError : Foundation.NSError {
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers public class RouteManager {
+  @objc deinit
+}
+@objc public protocol RHOnboardingDelegate {
+  @objc func resultOK()
+  @objc func resultKO(sdkError: RHOnboardingSDK.RHOnboardingError)
+  @objc func generateApplicant(applicantID: Swift.String)
+}
+@_inheritsConvenienceInitializers @objc final public class RHOnboarding : ObjectiveC.NSObject {
+  @objc public static let shared: RHOnboardingSDK.RHOnboarding
+  @objc weak final public var delegate: (any RHOnboardingSDK.RHOnboardingDelegate)?
+  @objc final public func setAppLicense(user: Swift.String, pass: Swift.String, sandBoxMode: Swift.Bool)
+  #if compiler(>=5.3) && $AsyncAwait
+  @objc final public func initOnboardingFlow(_ viewController: UIKit.UIViewController, _ applicantID: Swift.String) async throws
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  @objc final public func initOnboardingFlow(_ viewController: UIKit.UIViewController, firstName: Swift.String, lastName: Swift.String, journey: Swift.String, dateOfBirth: Swift.String) async throws
+  #endif
+  @objc override dynamic public init()
+  @objc deinit
+}
+public enum OnboardingError : Swift.Error, Foundation.LocalizedError {
+  case general(any Swift.Error)
+  case generalStatus(Swift.Int)
+  case badRequest
+  case notAuthorized
+  case notFound
+  case internalServerError
+  case expectedError(Swift.String)
+  case sdkError(Swift.String)
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+public enum labelPage : Swift.String, Swift.Codable {
+  case select_doc_lesa_01
+  case up_pass_front_lesa_02
+  case up_dl_front_lesa_03
+  case up_ice_front_lesa_04
+  case up_pass_front_ko_lesa_05
+  case up_pass_front_ok_lesa_06
+  case up_dl_front_ko_lesa_07
+  case up_dl_front_ok_lesa_08
+  case up_ice_front_ko_lesa_09
+  case up_ice_front_ok_lesa_10
+  case up_dl_back_lesa_11
+  case up_ice_back_lesa_12
+  case up_dl_back_ko_lesa_13
+  case up_dl_back_ok_lesa_14
+  case up_ice_back_ko_lesa_15
+  case up_ice_back_ok_lesa_16
+  case selfie_info_lesa_17
+  case up_selfie_front_lesa_18
+  case up_selfie_front_lesa_ko_19
+  case up_selfie_front_lesa_ok_20
+  case finish_lesa_21
+  public init?(rawValue: Swift.String)
+  public typealias RawValue = Swift.String
+  public var rawValue: Swift.String {
+    get
+  }
+}
+public enum NetworkError : Swift.Error, Foundation.LocalizedError {
+  case general(any Swift.Error)
+  case invalidStatusCode(Swift.Int)
+  case invalidRequest
+  case invalidData(any Swift.Error)
+  case customError(Any)
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
+extension RHOnboardingSDK.labelPage : Swift.Equatable {}
+extension RHOnboardingSDK.labelPage : Swift.Hashable {}
+extension RHOnboardingSDK.labelPage : Swift.RawRepresentable {}

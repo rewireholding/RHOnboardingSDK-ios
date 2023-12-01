@@ -1,0 +1,11 @@
+framework module RHOnboardingSDK {
+  umbrella header "RHOnboardingSDK.h"
+  export *
+
+  module * { export * }
+}
+
+module RHOnboardingSDK.Swift {
+  header "RHOnboardingSDK-Swift.h"
+  requires objc
+}
